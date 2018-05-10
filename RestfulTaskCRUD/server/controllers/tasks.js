@@ -8,8 +8,8 @@ module.exports = ()=>{
         },
         task: (req, res)=>{
             var taskid = req.params.id
-            Task.findById(id, (err, task)=>{
-                err=err ? console.log("ERROR THIS TASK", err) & res.json({message: "TASK ERROR"}): res.json({message: "Success", task :task});
+            Task.findById(taskid, (err, task)=>{
+                err=err ? console.log("ERROR THIS TASK", err) & res.json({message: "TASK ERROR"}): res.json({message: "Success", task:task});
             })
         },
         createtask: (req, res)=>{

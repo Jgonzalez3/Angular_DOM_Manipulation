@@ -15,4 +15,9 @@ export class HttpService {
     //   console.log("Got our tasks!", data)
     // });
   }
+  getTask(id:string){
+    console.log(id);
+    console.log(typeof(id));
+    return this._http.get('/tasks/' + id);
+  }
 }

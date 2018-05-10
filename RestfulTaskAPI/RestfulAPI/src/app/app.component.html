@@ -4,6 +4,20 @@
     {{ title }}!
   </h1>
 </div>
+<div class="taskscontainer text-center">
+  <button class="btn btn-lg btn-success" (click)="getTasksFromService()">Get All Tasks</button>
+      <span *ngFor="let x of tasks">
+        <h2>{{x.title}} <button class="btn btn-info float-right" (click)="getTaskFromThisTasks(x._id)">SHOW</button></h2>
+      </span>
+</div>
+<br>
+<div *ngIf="task !== undefined" class="uniquetask text-center" >
+  <span>
+    <h2>{{task.title}}</h2>
+    <p>{{task.description}}</p>
+  </span>
+</div>
+<!-- <h1>DOM Part 1 below</h1>
 <h2>All the tasks:</h2>
 <ul>
   <li *ngFor="let x of tasks">
@@ -16,5 +30,5 @@
   <li>
     <h2>{{tasks[2].title}} - {{tasks[2].description}}</h2>
   </li>
-</ul>
+</ul> -->
 

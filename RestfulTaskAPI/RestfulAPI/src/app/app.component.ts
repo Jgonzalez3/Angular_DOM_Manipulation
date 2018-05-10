@@ -11,17 +11,16 @@ export class AppComponent implements OnInit{
   tasks: string[];
   task: string;
   eventword: string;
+  newTask: any;
   constructor(private _httpService: HttpService) {
   }
   // ngOnInit is like document ready
   ngOnInit(){
     // this.getTasksFromService()
-    this.tasks
-    this.task
     this.eventword = ""
+    this.newTask = {title: "", description: ""}
   }
   getTasksFromService(){
-
     let observable = this._httpService.getTasks();
     observable.subscribe(data => {
       console.log("Got our TASKS", data)
@@ -32,31 +31,35 @@ export class AppComponent implements OnInit{
   getTaskFromThisTasks(id: string){
     console.log(id);
     for(var x = 0; x<this.tasks.length; x++){
-      if(id == this.tasks[x]._id){
+      if(id == this.tasks[x]['_id']){
         this.task = this.tasks[x];
         console.log(this.task);
       }
     }
   }
+  OnSubmit(){
+    this.newTask = {title: "", description: ""}
+  }
   getTaskFromKeyup(event: any){
-    console.log(event)
-    console.log(`EVENT, ${event.key}`);
+    // console.log(event)
+    // console.log(`EVENT, ${event.key}`);
     //regex below searches for letters only and whitespaces:
     var letters = /^[A-Za-z-\s]+$/;
     var eventkey = event.key;
     if(eventkey.match(letters) && eventkey.length < 2){
       this.eventword += event.key;
     }
-    console.log(event.code)
+    // console.log(event.code)
     //conditional below is to delete last letter in string eventword with slice method
     if(event.code == "Backspace"){
       this.eventword = this.eventword.slice(0,this.eventword.length-1);
     }
-    console.log(this.eventword);
+    // console.log(this.eventword);
     for(var x = 0; x<this.tasks.length; x++){
-      if(this.eventword == this.tasks[x].title){
+      if(this.eventword == this.tasks[x]['title']){
         this.task = this.tasks[x];
         console.log(this.task);
+        break;
       }
     }
   }

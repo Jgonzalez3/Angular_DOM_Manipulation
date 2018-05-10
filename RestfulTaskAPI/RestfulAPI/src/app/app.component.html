@@ -6,7 +6,7 @@
 </div>
 <div class="taskscontainer text-center">
   <button class="btn btn-lg btn-success" (click)="getTasksFromService()">Get All Tasks</button><br>
-  <p><input class="form-control" *ngIf="tasks !==undefined" type="text" (keyup)="getTaskFromKeyup($event)" placeholder="Enter Task Name To Display Details"></p>
+  <p><input class="form-control" *ngIf="tasks !==undefined" type="text" (keydown)="getTaskFromKeyup($event)" placeholder="Enter Task Name To Display Details"></p>
       <span *ngFor="let x of tasks">
         <h2>{{x.title}} <button class="btn btn-info float-right" (click)="getTaskFromThisTasks(x._id)">SHOW</button></h2>
       </span>

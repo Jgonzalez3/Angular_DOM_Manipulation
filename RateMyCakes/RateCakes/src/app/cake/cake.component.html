@@ -1,0 +1,15 @@
+<h1>Baked by {{showCake.baker}}</h1>
+<div class="row">
+  <img style="height: 300px; width: 400px" [src]="showCake.image" alt="cake">
+  <div class="col-md-6 commentbox">
+    <span *ngIf="showCake.ratingsum">Average rating: {{showCake.ratingsum}}</span>
+    <span *ngIf="!showCake.ratingsum">Be the First to Comment!</span>
+    <div *ngFor="let c of showCake.comments">
+      <br>
+      <span>{{c.comment}}</span><br>
+      <span *ngIf="c.rating>1">{{c.rating}} stars</span>
+      <span *ngIf="c.rating==1">{{c.rating}} star</span>
+    </div>
+  </div>
+</div>
+

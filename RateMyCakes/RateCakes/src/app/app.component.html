@@ -1,0 +1,53 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container">
+<div>
+  <h1>
+    {{ title }}!
+  </h1>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="border border-secondary addcakebox">
+      <h5 class="border-bottom border-primary">Submit a cake to be rated</h5>
+      <form (submit)="createCake()">
+      <label for="baker">Baker name:
+        <input class="form-control" type="text" name="newcake.baker" [(ngModel)]="newcake.baker" placeholder="Deanna" required>
+      </label>
+      <label for="image">Image url:
+        <input class="form-control" type="text" name="newcake.image" [(ngModel)]="newcake.image" placeholder="http://cake.com" required>
+      </label>
+      <br>
+      <button class="btn btn-lg alert-primary" type="submit">SUBMIT</button>
+      </form>
+      <br>
+      <input class="form-control" type="text" (keydown)="getCakeFromKeydown($event)" placeholder="search by baker">
+    </div>
+  </div>
+  <div class="col-md-8 cakesbox">
+    <div *ngFor="let x of cakes">
+      <br>
+      <div class="col-md-6 cakeimg">
+        <img style="height: 175px; width: 250px" [src]="x.image" alt="cakes" (click)="showCake(x)">
+      </div>
+      <div class="col-md-6 addcommentbox" >
+      <form (submit)="createComment(x._id, x)">
+        <select class="form-control" name="newcomment.rating" [(ngModel)]="newcomment.rating">
+          <option value="1">1 Star</option>
+          <option value="2">2 Stars</option>
+          <option value="3">3 Stars</option>
+          <option value="4">4 Stars</option>
+          <option value="5">5 Stars</option>
+        </select>
+        <input class="form-lg form-control" type="text" name="newcomment.comment" [(ngModel)]="newcomment.comment" placeholder="Type your comment here" required>
+        <br>
+        <button class="btn btn-sm btn-dark float-right" type="submit">Rate!</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br><br>
+<app-cake *ngIf="selectedCake" [showCake]="selectedCake"></app-cake>
+</div>
+

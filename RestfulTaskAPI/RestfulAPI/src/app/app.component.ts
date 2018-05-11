@@ -12,6 +12,7 @@ export class AppComponent implements OnInit{
   task: string;
   eventword: string;
   newTask: any;
+  selectedTask: any;
   constructor(private _httpService: HttpService) {
   }
   // ngOnInit is like document ready
@@ -28,19 +29,18 @@ export class AppComponent implements OnInit{
       console.log(this.tasks);
     })
   }
-  getTaskFromThisTasks(id: string){
+  getTaskFromService(id: string){
     console.log(id);
-    for(var x = 0; x<this.tasks.length; x++){
-      if(id == this.tasks[x]['_id']){
-        this.task = this.tasks[x];
-        console.log(this.task);
-      }
-    }
+    let observable = this._httpService.getTask(id);
+    observable.subscribe(data =>{
+      console.log("Got TASK", data);
+      this.task = data["task"];
+    })
   }
-  OnSubmit(){
-    this.newTask = {title: "", description: ""}
+  taskToShow(task){
+    this.selectedTask = task;
   }
-  getTaskFromKeyup(event: any){
+  getTaskFromKeydown(event: any){
     // console.log(event)
     // console.log(`EVENT, ${event.key}`);
     //regex below searches for letters only and whitespaces:
@@ -57,8 +57,8 @@ export class AppComponent implements OnInit{
     // console.log(this.eventword);
     for(var x = 0; x<this.tasks.length; x++){
       if(this.eventword == this.tasks[x]['title']){
-        this.task = this.tasks[x];
-        console.log(this.task);
+        this.selectedTask = this.tasks[x];
+        console.log(this.selectedTask);
         break;
       }
     }

@@ -7,7 +7,7 @@ import { HttpService } from './http.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'Taskful CRUD';
+  title = 'RestfulTask CRUD';
   tasks: string[];
   task: any;
   newtask: any;

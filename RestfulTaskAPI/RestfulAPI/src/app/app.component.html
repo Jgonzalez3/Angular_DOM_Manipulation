@@ -1,4 +1,3 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
     {{ title }}!
@@ -6,18 +5,14 @@
 </div>
 <div class="taskscontainer text-center">
   <button class="btn btn-lg btn-success" (click)="getTasksFromService()">Get All Tasks</button><br>
-  <p><input class="form-control" *ngIf="tasks !==undefined" type="text" (keydown)="getTaskFromKeyup($event)" placeholder="Enter Task Name To Display Details"></p>
+  <p><input class="form-control" *ngIf="tasks !==undefined" type="text" (keydown)="getTaskFromKeydown($event)" placeholder="Enter Task Name To Display Details"></p>
       <span *ngFor="let x of tasks">
-        <h2>{{x.title}} <button class="btn btn-info float-right" (click)="getTaskFromThisTasks(x._id)">SHOW</button></h2>
+        <h2>{{x.title}} <button class="btn btn-info float-right" (click)="taskToShow(x)">SHOW</button></h2>
       </span>
 </div>
 <br>
-<div *ngIf="task !== undefined" class="uniquetask text-center" >
-  <span>
-    <h2>{{task.title}}</h2>
-    <p>{{task.description}}</p>
-  </span>
-</div>
+<app-task *ngIf="selectedTask" [taskToShow]="selectedTask"></app-task>
+
 <!-- <h1>DOM Part 1 below</h1>
 <h2>All the tasks:</h2>
 <ul>
